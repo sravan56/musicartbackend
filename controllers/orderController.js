@@ -26,7 +26,7 @@ const placeOrder = async (req, res) => {
 const getAllOrders = async (req, res) => {
   try {
     const {userId}=req.params;
-    const orders = await Order.find().populate('userId', 'name email'); 
+    const orders = await Order.find({userId}).populate('userId', 'name email'); 
 
     res.status(200).json({ success: true, orders });
   } catch (error) {
