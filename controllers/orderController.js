@@ -1,11 +1,14 @@
 const express = require("express");
 const Order = require("../models/Order");
+const Cart=require('../models/Cart');
 
 const placeOrder = async (req, res) => {
   try {
     const { userId } = req.params;
     const { cartItems, deliveryAddress, paymentMethod, totalPrice, deliveryFee } =
       req.body;
+
+      await Cart.findOneAndDelete({userId});
     const order = new Order({
       userId,
       cartItems,
